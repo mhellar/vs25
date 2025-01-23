@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link type="text/css" href="assets/styles.css" rel="stylesheet"/>
+		<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+		<style>
+			#playerContainer {
+				position: fixed;
+				bottom: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 1000;
+				background: rgba(0,0,0,0.5);
+				padding: 10px;
+				border-radius: 5px;
+			}
+			#captions {
+				position: fixed;
+				bottom: 80px;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 1000;
+				background: rgb(35, 34, 39);
+				color: white;
+				padding: 10px;
+				border-radius: 5px;
+				text-align: center;
+				min-width: 200px;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<img src="img/study_day.jpg" height="300"><br>
+					<p style="font-size: 0.7em;">Since 2007 I've worked with the collections and conservation department at SFMOMA specializing on the conservation and exhibition of digital media art. I'vs also worked on conservation and exhbition projects at MoMA, Solomon Guggenheim, Smithsonian Institution and the San Francisco Art Commission</p>
+				</section>
+
+				<section>
+					<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; height: 80vh; margin: 0 auto; max-width: 90vw; position: relative; top: -15vh;">
+						<div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+							<img src="img/ybma.png" style="height: 130%; width: auto; object-fit: contain; max-width: 60%;">
+							<iframe src="https://player.vimeo.com/video/499043860?title=0&byline=0&portrait=0" style="height: 91%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+						</div>
+						<p style="font-size: 0.7em; text-align: center;">I've also worked on the production of media at, This was a project I worked on with Jenny Holzers studio, it was a 7 site AR walking tour on the U of Chicago's Campus</p>
+					</div>
+
+				</section>
+				<section>
+					<img src="img/3dsi.png" height="300"><br>
+					<img src="img/nytrd.png" height="350"><br>
+				</section>
+
+				<section>
+					<img src="img/chsa.jpg" height="300"><br>
+					<img src="img/chsa_ar.png" height="300"><br>
+				</section>
+
+				<section>
+					<div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 0 auto; max-width: 90vw;">
+						<img src="img/ws.jpg" height="300">
+						<img src="img/ws2.jpg" height="300">
+						<img src="img/ws3.PNG" height="300">
+					</div>
+				</section>
+				<section>
+					<model-viewer src="assets/8_3_2024.glb" 
+						audio-controls
+						autoplay
+						ar ar-modes="webxr scene-viewer quick-look" 
+						camera-controls 
+						auto-rotate
+						preload
+						tone-mapping="neutral" 
+						shadow-intensity="2" 
+						exposure="0.46" 
+						shadow-softness="1" 
+						camera-orbit="-1100deg 79.12deg 0.6218m" 
+						field-of-view="12.54deg"
+						style="width: 100%; height: 500px;">
+						<div class="progress-bar hide" slot="progress-bar">
+							<div class="update-bar"></div>
+						</div>
+						<button slot="ar-button" id="ar-button">
+							View in your space
+						</button>
+						<div id="ar-prompt">
+							<img src="assets/ar_hand_prompt.png">
+						</div>
+					</model-viewer>
+					<audio controls>
+						<source src="assets//recording.m4a" type="audio/mpeg">
+						Your browser does not support the audio element.
+					</audio>
+				</section>
+				<section>
+				<section data-background="img/72-points-mesh.svg" data-background-repeat="repeat"
+				data-background-size="100px" data-background-transition="zoom">
+				<iframe width="500" height="500" src="https://mhellar.github.io/ar3dmodel/9/"
+				title="book" frameborder="0" scrolling="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe><br>
+				Annotations as a tool of condition assement and documentation.
+				</section>
+				</section>
+				<section>
+					<img src="img/catalogit.png" height="300">
+					<img src="img/catalogitplugin.png" height="300">
+					<p style="font-size: 0.7em; text-align: center;">We worked ith the collection management vendor(catalogit) to allow to store the 3d files in the CMS and disseminate them via an API!</p>
+				</section>
+					<section data-background="img/72-points-mesh.svg" data-background-repeat="repeat"
+					data-background-size="100px" data-background-transition="zoom">
+					<iframe width="500" height="500" src="https://mhellar.github.io/chsa_scans/mh2/"
+					title="book" frameborder="0" scrolling="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen></iframe><br>
+                   <img src="img/mh2.png" height="100">
+					</section>
+				<section>
+					<p><a href="img/scanning_guidebook.png" target="_blank">
+						<img src="img/scanning_guidebook.png" alt="Scanning Guidebook" style="max-height: 400px;">
+					</a></p>	
+					<img src="img/3dguidebook.png" height="100">
+				</section>
+
+				<section data-background="img/72-points-mesh.svg" data-background-repeat="repeat"
+data-background-size="80px" data-background-transition="zoom">
+
+<ul>
+    <li>Many Collecting institutions can only show a small percentage of their collection</li>
+    <li class="fragment">CHSA currently has ~20 of its objects on display from a collection of 20,000</li>
+    <li class="fragment">While SI had great resources for this effort there has not been a model for small to medium institutions</li>
+    <li class="fragment">Advances in this technology have made it possible and affordable to give wider access to collections</li>
+</ul>
+</p> 
+</section>
+
+<section>
+	<img src="img/xrt.png" alt="" srcset="">
+	<p style="font-size: 0.7em;">My colleague Francis Li, created content management system for authoring walking tours with interactive content for CHSA staff and all(open source)</p>
+</section>
+
+<section>
+	<video width="" height="600" controls>
+		<source src="img/Sequence 01_1.mp4" type="video/mp4">
+		Your browser does not support the video tag.
+	  </video>
+</section>
+<section>
+	<div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+		<div id="appQRCode" style="background: white; padding: 20px; margin: 20px;"></div>
+		<p><a href="https://chsa.8thwall.app/ccbasf/" target="_blank">Launch AR Experience</a></p>
+	</div>
+</section>
+<section>
+Thank You! Massive thanks to VoCA, SFMOMA, CHSA and the Stanford Art Dept.<br>
+mark@hellarstudios.com<br>
+415-694-9475<br>
+*The tools and curriculumn shown here today are open source and open to you, reach out out if you would like to use or contribute!
+</section>
+
+
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<!-- <script src="assets/script.js"></script> -->
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				transition: 'fade', // Setting default transition to fade
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			}).then(() => {
+				// Initialize our custom script after Reveal is ready
+				const div = document.createElement('div');
+				div.id = 'playerContainer';
+
+				// Generate QR code for 8thwall app
+				new QRCode(document.getElementById("appQRCode"), {
+					text: "https://chsa.8thwall.app/ccbasf/",
+					width: 256,
+					height: 256,
+					colorDark : "#000000",
+					colorLight : "#ffffff",
+					correctLevel : QRCode.CorrectLevel.H
+				});
+			});
+		</script>
+	</body>
+</html>
