@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Orbiting Spheres with Particle System</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Scene, Camera, Renderer
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Central Sphere
+        const centralSphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+        const centralSphereMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const centralSphere = new THREE.Mesh(centralSphereGeometry, centralSphereMaterial);
+        scene.add(centralSphere);
+
+        // Orbiting Spheres
+        const orbitingSpheres = [];
+        const speeds = [0.01, 0.02, 0.03];
+        const directions = [1, -1, 1];
+        const distances = [3, 5, 7];
+
+        for (let i = 0; i < 3; i++) {
+            const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+            const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
+            const sphere = new THREE.Mesh(geometry, material);
+            sphere.position.x = distances[i];
+            orbitingSpheres.push({ mesh: sphere, speed: speeds[i], direction: directions[i] });
+            scene.add(sphere);
+        }
+
+        // Particle System
+        const particleCount = 1000;
+        const particles = new THREE.BufferGeometry();
+        const particlePositions = new Float32Array(particleCount * 3);
+        const particleColors = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount; i++) {
+            particlePositions[i * 3] = (Math.random() - 0.5) * 20;
+            particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+            particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+
+            particleColors[i * 3] = Math.random();
+            particleColors[i * 3 + 1] = Math.random();
+            particleColors[i * 3 + 2] = Math.random();
+        }
+
+        particles.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+        particles.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+
+        const particleMaterial = new THREE.PointsMaterial({ vertexColors: true, size: 0.1 });
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+
+        // Camera Position
+        camera.position.z = 15;
+
+        // Animation Loop
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Rotate Orbiting Spheres
+            orbitingSpheres.forEach((orbitingSphere, index) => {
+                const angle = Date.now() * orbitingSphere.speed * orbitingSphere.direction;
+                orbitingSphere.mesh.position.x = Math.cos(angle) * distances[index];
+                orbitingSphere.mesh.position.z = Math.sin(angle) * distances[index];
+            });
+
+            // Change Particle Colors and Positions
+            const positions = particles.attributes.position.array;
+            const colors = particles.attributes.color.array;
+
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3] += (Math.random() - 0.5) * 0.1;
+                positions[i * 3 + 1] += (Math.random() - 0.5) * 0.1;
+                positions[i * 3 + 2] += (Math.random() - 0.5) * 0.1;
+
+                colors[i * 3] = Math.sin(Date.now() * 0.001 + i);
+                colors[i * 3 + 1] = Math.cos(Date.now() * 0.001 + i);
+                colors[i * 3 + 2] = Math.sin(Date.now() * 0.002 + i);
+            }
+
+            particles.attributes.position.needsUpdate = true;
+            particles.attributes.color.needsUpdate = true;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html>
